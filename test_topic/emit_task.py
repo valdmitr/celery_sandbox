@@ -17,6 +17,9 @@ import celery_log
 
 # app = Celery('celery_log', backend='rpc://', broker='pyamqp://guest@localhost//')
 
+task_default_exchange = 'top'
+task_default_exchange_type = 'topic'
+
 body = "task completed"
 status = "ok"
 # status = "oky-doky"

@@ -4,9 +4,15 @@ import celery_log
 import my_celery_worker
 
 app = Celery('update', backend='rpc://', broker='pyamqp://guest@localhost//')
-app.conf.task_default_queue = 'home'
 
-task_routes = {'home.*': {'queue': 'home'}}
+app.conf.task_default_queue = 'test'
+
+app.conf.task_default_exchange = 'top'
+app.conf.task_default_exchange_type = 'topic'
+
+# app.conf.task_routes = {'home.*': {'queue': 'test'}}
+
+app.conf.task_default_routing_key = 'home.*'
 
 @app.task(routing_key="home.*")
 def see_string(body, status):
